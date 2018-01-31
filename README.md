@@ -5,11 +5,15 @@ DNAreadsToByte is a simple R script that takes a fasta file of short 117-pb long
 
 The 117-bp requirement represents the length of the artifical fragments, so the user should ensure that all sequences of the fasta are exactly this long, or else the script may not behave properly.
 
-The script will look for "reads.fasta" in its default directory. The folder where the decoded files will be saved is chosen as that of the input fasta. The script needs the tabular file describing the Huffman code used in goldman et al. (View_huff3.cd.new.correct) and will look for it in this directory.
+usage:
 
-Decoded file names use the prefix "file" followed by a number from 0 to 8, with no extension. 
+RScript DNAreadsToBytes path_to_reads.fasta folder_where_you_want_decoded_files path_to_huffman_code_table_file
 
-As the complete fasta is imported in the R environment, the user should ensure that their computer has enough free RAM for the script to run, that is, at least 2-3 times the size of the fasta file.
+If the last argument if not provided, the script will look for the file "View_huff3.cd.new.correct" in the directory specified as the second argument.
+
+Decoded file names will use the prefix "file" followed by a number from 0 to 8, with no extension. 
+
+As the complete fasta is imported in the R environment, the user should ensure that their computer has enough free RAM for the script to run, that is, at least 3 times the size of the fasta file.
 
 The script has been tested in R 3.3.2 and requires the following packages to be installed:
 
