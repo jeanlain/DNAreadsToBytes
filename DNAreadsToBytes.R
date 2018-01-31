@@ -20,7 +20,7 @@ missing = !file.exists(paths)
 if(any(missing)) stop(paste("missing file(s):", paste(paths[missing], collapse =", ")))
 
 
-###########defining "basic" functions" used in the script
+########### "basic" functions used in the script
 
 baseTypes = c("A","C","G","T")			
 
