@@ -12,6 +12,7 @@ Decoded file names use the prefix "file" followed by a number from 0 to 8, with 
 As the complete fasta is imported in the R environment, the user should ensure that their computer has enough free RAM for the script to run, that is, at least 2-3 times the size of the fasta file.
 
 The script has been tested in R 3.3.2 and requires the following packages to be installed:
+
 data.table
 stringi
 Biostrings
