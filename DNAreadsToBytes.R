@@ -20,7 +20,7 @@ missing = !file.exists(paths)
 if(any(missing)) stop(paste("missing file(s):", paste(paths[missing], collapse =", ")))
 
 
-########### "basic" functions used in the script
+###########defining "basic" functions" used in the script
 
 baseTypes = c("A","C","G","T")			
 
@@ -185,7 +185,7 @@ ends = temp[gap == T, min(LOC), by = FILE]$V1		#the last location index with goo
 starts = temp[, min(LOC), by = FILE]$V1				#and the first
 valid = which((ends - starts) > 20) - 1				#retains file numbers with enough "good" locations (20 is arbitrary)
 rm(temp, starts, gap, rows)
-cat(stri_c("file", valid, ", estimated size: ", ends[valid]*25, "\n"))
+cat(stri_c("file", valid, ", estimated size: ", ends[valid+1]*25), sep="\n")
 
 
 #now generating the global consensus sequences for files
