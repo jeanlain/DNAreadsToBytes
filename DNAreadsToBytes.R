@@ -184,6 +184,7 @@ gap = temp[, c(LOC[rows] - LOC[rows-1] > 6, F)]		#then finding "gaps" between su
 ends = temp[gap == T, min(LOC), by = FILE]$V1		#the last location index with good consensus for each file
 starts = temp[, min(LOC), by = FILE]$V1				#and the first
 valid = which((ends - starts) > 20) - 1				#retains file numbers with enough "good" locations (20 is arbitrary)
+if(length(valid)==0) stop("no file with reliable sequence could be found. Exiting.")
 rm(temp, starts, gap, rows)
 cat(stri_c("file", valid, ", estimated size: ", ends[valid+1]*25), sep="\n")
 
