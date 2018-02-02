@@ -134,13 +134,13 @@ reads = reads[occurences(stri_c(FILE, LOC, sep = " ")) <= 100, ]		#we retain no 
 
 #now making a consensus sequences at each location index. We do it before the keystream conversion, as a single error may result in a borked read after this conversion. We will only convert the (hopefully error-free) consensuses.
 cat("generating local consensuses...\n")
-reads = reads[, data.table(stringToMatrix(stri_sub(SEQ, 2, 101)), N, FILE, LOC)]		#splits the 100 nt that encode file data into individual bases
+reads = reads[, data.table(stringToMatrix(stri_sub(SEQ, 2, 101)), N, FILE, LOC)]	#splits the 100 nt that encode file data into individual bases
 
-counts = function(mat, Ns) {														#this counts the number of reads for each of the 4 possible bases at the 100 positions of a location (takes a base matrix and the number of reads per sequences). We will do this for each location index
-	readCounts = function(base) {													#this does it the above for a given type of base
-		Nmat = matrix(Ns, nrow(mat), ncol(mat))										#generate a matrix in which rows represent sequences and columns positions. It contains the number of reads per sequence (identical for all cells of the same row)
-		Nmat[mat != base] = 0L														#we remove counts for other bases
-		colSums(Nmat)																#so we can count reads for the base we're interested in
+counts = function(mat, Ns) {								#this counts the number of reads for each of the 4 possible bases at the 100 positions of a location (takes a base matrix and the number of reads per sequences). We will do this for each location index
+	readCounts = function(base) {							#this does it the above for a given type of base
+		Nmat = matrix(Ns, nrow(mat), ncol(mat))					#generate a matrix in which rows represent sequences and columns positions. It contains the number of reads per sequence (identical for all cells of the same row)
+		Nmat[mat != base] = 0L							#we remove counts for other bases
+		colSums(Nmat)								#so we can count reads for the base we're interested in
 	}
 	lapply(baseTypes, readCounts)
 }
