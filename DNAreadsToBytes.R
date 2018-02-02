@@ -1,4 +1,4 @@
-#I know I use "=" instread of "<-". Don't get mad. 
+#I know I use "=" instead of "<-". Don't get mad. 
 
 require(stringi)
 require(data.table)	
@@ -160,7 +160,7 @@ consScores = matrix(maxScores, ncol = 100, byrow = T)					#we do the same for th
 rm(countMat, maxCounts, maxFreqs, maxScores)
 
 #doing the keystream decoding on consensus sequences. The four different keys are used as rows of an integer matrix:
-cat("keysteam decoding...\n")
+cat("keystream decoding...\n")
 ks = stringToMatrix(c("002000010110102111112122210011122221010102121222022000221201020221002121121000212222021211121122221", "202020122121210120001200210222112020222022222220220001221012111022121120202022211221112202002121022", "221221101200221120220011002222100000020200021121021020122100021201010210202002000101020022121100100", "100122100011112100120210020011102201122122100100120122212000021220022012202201100010212222110222020"))
 storage.mode(ks) = "integer"
 
