@@ -67,9 +67,11 @@ occurences = function(vect) {							#tells the occurence of the element found, f
 	res
 }
 
-rowMatches = function(values, mat) {						#returns the first position (column) of each element of "values" in each corresponding row of matrix "mat" (recycling may work, as values can have 1 element)
-	res = which(mat==values, arr.ind = T)
-	res[match(1:nrow(mat), res[,1]), 2]
+rowMatches = function(values, mat, nomatch = NA) {						#returns the first position (column) of each element of "values" in each corresponding row of matrix "mat" (recycling may work, as values can have 1 element)
+	matches = rep(nomatch, nrow(mat))
+	w = which(mat==values, arr.ind = T)
+	matches[w[,1]] = w[,2]
+	matches
 }
 
 cumsumMatrix = function(mat) {							#returns a matrix in which colums represent the cumulated sums of the colums of mat, starting from the left
