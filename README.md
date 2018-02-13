@@ -7,7 +7,7 @@ The 117-bp requirement represents the length of the artifical fragments, so the 
 
 usage:
 
-RScript DNAreadsToBytes.R   path_to_reads.fasta   folder_where_you_want_decoded_files   path_to_huffman_code_table_file
+RScript   DNAreadsToBytes.R   path_to_reads.fasta   folder_where_you_want_decoded_files   path_to_huffman_code_table_file
 
 If the last argument is not provided, the script will look for the file "View_huff3.cd.new.correct" in the directory specified as the second argument.
 
