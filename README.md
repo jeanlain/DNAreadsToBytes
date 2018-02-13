@@ -1,7 +1,7 @@
 # DNAreadsToBytes
 Decodes digital (byte) information encoded in short DNA sequences (fasta) according to Goldman et al. (2013) and saves it as files.
 
-DNAreadsToByte.R is a simple R script that takes a fasta file of short 117-bp long reads that are sequenced from artificially produced DNA fragments used to encode computer files, according to Goldman et al. Nature. (2013) doi:  10.1038/nature11875. Decoding follows the specification 2.0 as detailed in https://www.ebi.ac.uk/sites/ebi.ac.uk/files/groups/goldman/file2features_2.0.pdf
+DNAreadsToByte.R is a simple R script that takes a fasta file of  117-bp long-reads that are sequenced from artificially produced DNA fragments used to encode computer files, according to Goldman et al. Nature. (2013) doi:  10.1038/nature11875. Decoding follows the specification 2.0 as detailed in https://www.ebi.ac.uk/sites/ebi.ac.uk/files/groups/goldman/file2features_2.0.pdf
 
 The 117-bp requirement represents the length of the artifical fragments, so the user should ensure that all sequences of the fasta are exactly this long, or else the script may not behave properly.
 
