@@ -74,24 +74,12 @@ rowMatches = function(values, mat, nomatch = NA) {						#returns the first posit
 	matches
 }
 
-splitToColumns = function(vector, split, columns) {  				#splits a character vector into columns (like excel). A column range can be specified as an integer vector and "cells" are filled with NAs if needed. By default, it generate as many columns as necessary given the character(s) used to split the vector elements.
-	vector = as.character(vector)
-	res = stri_split_fixed(vector,split, omit_empty = NA, simplify = T)
-	if (missing(columns)) {
-		columns = 1:ncol(res)
-	}
-	if (any(columns < 1)) {
-		stop("inappropriate column parameter. Use integers >=1")
-	}
-	columns =round(columns)
-	res = res[,columns]
-}
 
 ###################################################
 	       
 code = readLines(huffmanCode, skipNul = T)					#imports the huffman code. read.table() doesn't like it.
 
-code = data.table(splitToColumns(code[-length(code)] ,"\t"))			#split lines into a table (discards the last line, as it apparently doesn't correspond to a byte)
+code = data.table(stri_split_fixed(code[-length(code)] ,"\t", omit_empty = NA, simplify = T))			#split lines into a table (discards the last line, as it apparently doesn't correspond to a byte)
 code[,byte := as.hexmode(as.integer(V3))]					
 	       
 cat("importing reads...\n")
