@@ -74,12 +74,6 @@ rowMatches = function(values, mat, nomatch = NA) {						#returns the first posit
 	matches
 }
 
-cumsumMatrix = function(mat) {							#returns a matrix in which colums represent the cumulated sums of the colums of mat, starting from the left
-	mat = cbind(mat, -rowSums(mat))
-	cs = matrix(cumsum(t(mat)), nrow(mat), byrow = T)
-	cs[,-ncol(cs)]
-}
-
 splitToColumns = function(vector, split, columns) {  				#splits a character vector into columns (like excel). A column range can be specified as an integer vector and "cells" are filled with NAs if needed. By default, it generate as many columns as necessary given the character(s) used to split the vector elements.
 	vector = as.character(vector)
 	res = stri_split_fixed(vector,split, omit_empty = NA, simplify = T)
@@ -172,7 +166,7 @@ first = d[,1]										#saves the first number (base) of each consensus, for lat
 d = (d[,2:100] - d[,1:99]) %% 4L - 1L							#computing base-4 differences between adjacent numbers, then substracting 1
 phase = cons$LOC %% 4L + 1L								#determines the key to substract (row of the ks matrix to use) depending on sequence location
 d = (d-ks[phase,]) %% 3L + 1L								#substracting (base 3) the appropriate key and adding 1
-d = cumsumMatrix(cbind(first, d)) %% 4L							#summing (base 4) successive trits to obtain base numbers (the reciprocal of the difference step)
+d = rowCumsums(cbind(first, d)) %% 4L							#summing (base 4) successive trits to obtain base numbers (the reciprocal of the difference step)
 
 #reverse complements sequences at odd location indices. We use the fact that bases are still encoded as numbers, so 3 - base is the complement of base
 odd = cons$LOC %% 2L > 0
