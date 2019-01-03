@@ -22,7 +22,7 @@ missing = !file.exists(paths)
 if(any(missing)) stop(paste("missing file(s):", paste(paths[missing], collapse =", ")))
 
 
-###########defining "basic" functions" used in the script
+###########defining "basic" functions used in the script
 
 baseTypes = c("A","C","G","T")			
 
@@ -34,7 +34,7 @@ toTrits = function(mat) {							#converts a matrix of DNA bases (sequences as ro
 	vapply(2:ncol(mat), function(col) conv[cbind(mat[,col-1], mat[,col])], integer(nrow(mat)))
 }
 
-stringToMatrix = function(vector) {						#splits a string vector into a matrix with one character per cell. Words are rows. The number of columns is the length of the longest word. We use as substring function (stri_sub()), which appears to be faster than a split
+stringToMatrix = function(vector) {						#splits a string vector into a matrix with one character per cell. Words are rows. The number of columns is the length of the longest word. We use a substring function (stri_sub()), which appears to be faster than a split
 	nchars = stri_length(vector)
 	m = max(nchars)
 	mat = matrix(NA,nrow = length(vector), ncol = m,byrow=T)
