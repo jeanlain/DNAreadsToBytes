@@ -169,7 +169,7 @@ reads[, c("ATstart", "GCend") := NULL]
 
 
 
-# STAGE TWO. Extraction of read index information -------------------------------------------
+# STEP TWO. Extraction of read index information -------------------------------------------
 
 cat("extracting read indexing information...\n")
 
@@ -217,7 +217,7 @@ reads <- reads[occurrences(stri_c(FILE, LOC, sep = " ")) <= 100, ]
 
 
 
-# STAGE TREE, Consensus calling -------------------------------------------------------
+# STEP TREE, Consensus calling -------------------------------------------------------
 
 # we make a consensus sequences at each location index. We do it before the
 # keystream conversion, as a single error may result in a borked read after this
@@ -292,7 +292,7 @@ rm(countMat, maxCounts, maxFreqs, maxScores)
 
 
 
-# STAGE FOUR, keystream decoding --------------------------------------------------------
+# STEP FOUR, keystream decoding --------------------------------------------------------
 
 # We do the keystream decoding on consensus sequences. The four different keys
 # are used as rows of an integer matrix:
@@ -366,7 +366,8 @@ cat(stri_c("file", valid, ", estimated size: ", ends[valid + 1] * 25), sep = "\n
 
 
 
-# STAGE FIVE, global file consensuses generation -----------------------------------------------------
+
+# STEP FIVE, file consensus generation -----------------------------------------------------
 
 # We now generate the global consensus sequences for files
 cat("generating file DNA sequences...\n")
@@ -463,7 +464,7 @@ consensus <- data.table(
 
 
 
-# STAGE SIXE, we convert DNA bases to bytes ---------------------------------------------
+# STEP SIX, we convert DNA bases to bytes ---------------------------------------------
 cat("converting to bytes and saving to file(s)...\n")
 
 
