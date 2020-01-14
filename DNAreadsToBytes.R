@@ -27,7 +27,7 @@ if (any(missing)) stop(paste("missing file(s):", paste(paths[missing], collapse 
 
 
 
-# defining "basic" functions" used in the script-----------------------------------------
+# defining "basic" functions used in the script-----------------------------------------
 
 baseTypes <- c("A", "C", "G", "T")
 
@@ -101,14 +101,6 @@ rowMatches <- function(values, mat) {
 }
 
 
-# returns a matrix in which colums represent the cumulated sums of the colums of mat, starting from the left
-cumsumMatrix <- function(mat) {
-  mat <- cbind(mat, -rowSums(mat))
-  cs <- matrix(cumsum(t(mat)), nrow(mat), byrow = T)
-  cs[, -ncol(cs)]
-}
-
-
 # splits a character vector into columns (like excel). A column range can be
 # specified as an integer vector and "cells" are filled with NAs if needed. By
 # default, it generate as many columns as necessary given the character(s) used
@@ -129,7 +121,7 @@ splitToColumns <- function(vector, split, columns) {
 
 
 
-# STEP ONE. Read import and initial processing ---------------------------------------------------------------
+# STEP ONE. Data import and initial processing ---------------------------------------------------------------
 
 code <- readLines(huffmanCode, skipNul = T)
 
@@ -307,7 +299,7 @@ ks <- stringToMatrix(c(
 storage.mode(ks) <- "integer"
 
 
-# WE convert bases to numbers
+# We convert bases to numbers
 d <- chartr("ACGT", "0123", consBases)
 storage.mode(d) <- "integer"
 
@@ -320,11 +312,11 @@ d <- (d[, 2:100] - d[, 1:99]) %% 4L - 1L
 # We determine the key to subtract (row of the ks matrix to use) depending on sequence location
 phase <- cons$LOC %% 4L + 1L
 
-# We subtract (base 3) the appropriate key and adding 1
+# We subtract (base 3) the appropriate key and add 1
 d <- (d - ks[phase, ]) %% 3L + 1L
 
 # We sum (base 4) successive trits to obtain base numbers (the reciprocal of the difference step)
-d <- cumsumMatrix(cbind(first, d)) %% 4L
+d <- rowCumsums(cbind(first, d)) %% 4L
 
 # We reverse complement sequences at odd location indices. We use the fact that
 # bases are still encoded as numbers, so 3 - base is the complement of base
